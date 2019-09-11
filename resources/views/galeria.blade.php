@@ -9,12 +9,34 @@
 
 @section("infoGeneral")
 
-<table border="1">
+<p>Contenido de la pagina</p>
+
+@if(count($alumnos))
+
+<table width="50%" border="1">
+
+	@foreach($alumnos as $persona)
+
 	<tr>
-		<td>Una cosa</td>
-		<td>Segunda cosa</td>
+		
+		<td>
+			
+			{{$persona}}
+
+		</td>
+
 	</tr>
+
+
+	@endforeach
+	
 </table>
+@else 
+{{"Sin alumnos"}}
+
+@endif
+
+
 @endsection
 
 
