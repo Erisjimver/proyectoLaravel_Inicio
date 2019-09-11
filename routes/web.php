@@ -21,3 +21,5 @@ Route::get("/","MiControlador@index");
 Route::get("/crear","MiControlador@create");
 Route::get("/articulos","MiControlador@store");
 Route::get("/mostrar","MiControlador@show");
+Route::get("/contacto","MiControlador@contactar");
+Route::get("/galeria","MiControlador@galeria");

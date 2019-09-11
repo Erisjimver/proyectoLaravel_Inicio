@@ -29,6 +29,13 @@ class MiControlador extends Controller
         return view("crear");
     }
 
+    public function galeria()
+    {
+        //
+        return view("galeria");
+    }
+
+
     /**
      * Store a newly created resource in storage.
      *
@@ -51,6 +58,13 @@ class MiControlador extends Controller
     {
         //
         return view("mostrar");
+    }
+
+
+    public function contactar()
+    {
+        //
+        return view("contacto");
     }
 
     /**
