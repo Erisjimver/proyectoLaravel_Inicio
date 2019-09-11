@@ -2,7 +2,7 @@
 
 @section("cabecera")
 
-<h1>Galeria</h1>
+
 
 @endsection
 
