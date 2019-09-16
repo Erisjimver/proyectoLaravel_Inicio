@@ -29,7 +29,7 @@ Route::get("/insertar",function(){
 //DB::insert("insert into articulos(nombre_articulo,precio,pais_de_origen_seccion,observaciones) values(?,?,?,?,?)",["jarron","15.2","japon","ceramica","ganga"]);
 
 });
-
+/*
 Route::get("/insertar", function(){
  DB::insert("INSERT INTO articulos (NOMBRE_ARTICULO, PRECIO, PAIS_DE_ORIGEN, SECCION, OBSERVACIONES) VALUES(?,?,?,?,?)",["JARRON",15.2,"JAPON","CERAMICA","GANGA"]);
 });
@@ -48,4 +48,80 @@ Route::get('/actualizar', function(){
 
 Route::get('/borrar', function(){
     DB::delete("DELETE FROM articulos WHERE ID=?", [1]);
+});
+
+*/
+
+
+use App\Articulo;//se debe colocar para importar el metodo All del modelo Articulo y evitar colcoar App/Articulo
+
+
+//consulta normal select *
+Route::get('/leer', function(){
+
+$articulos=Articulo::all();
+
+	//$articulos=App\Articulo::all();
+
+   // $resultados=DB::select("SELECT * FROM  articulos WHERE id=?", [2]);
+	//$resultados=DB::update("select nombre_articulo from articulos where id=1");
+    foreach($articulos as $articulo){
+    	echo "Nombre:" . $articulo->nombre_articulo . " Precio: " . $articulo->precio . "<br>";
+    }
+});
+
+
+
+//consulta adicionales constraints
+Route::get('/leer2', function(){
+//
+$articulos=Articulo::where("PAIS_DE_ORIGEN","JAPON")->get();
+//$articulos=Articulo::where("PAIS_DE_ORIGEN","JAPON")->min("precio");//buscar al articulo con el precio mas bajo
+
+//$articulos=Articulo::where("PAIS_DE_ORIGEN","JAPON")->orderby("nombre_articulo","desc")->get();//ordenando 
+	return $articulos;
+	//$articulos=App\Articulo::all();
+
+
+   /* foreach($articulos as $articulo){
+    	echo "Nombre:" . $articulo->nombre_articulo . " Precio: " . $articulo->precio . "<br>";
+    }
+    */
+});
+
+//insertar eloquent
+Route::get('/insertar', function(){
+//
+$articulos= new Articulo;
+
+$articulos->nombre_articulo="Pantalones";
+
+$articulos->precio=60;
+$articulos->PAIS_DE_ORIGEN="España";
+$articulos->observaciones="Lavados a la piedra";
+$articulos->seccion="Confecccion";
+$articulos->save();
+
+
+	return $articulos;
+
+});
+
+
+//actualizar eloquent
+Route::get('/actualizar2', function(){
+//
+$articulos=Articulo::find(3);
+
+$articulos->nombre_articulo="Pantalones";
+
+$articulos->precio=90;
+$articulos->PAIS_DE_ORIGEN="España";
+$articulos->observaciones="Lavados a la piedra";
+$articulos->seccion="Confecccion";
+$articulos->save();
+
+
+	return $articulos;
+
 });
