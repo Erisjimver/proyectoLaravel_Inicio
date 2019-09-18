@@ -24,47 +24,48 @@ Route::get("/mostrar","MiControlador@show");
 Route::get("/contacto","MiControlador@contactar");
 Route::get("/galeria","MiControlador@galeria");
 
+//insertar de forma directa
 Route::get("/insertar",function(){
 
-//DB::insert("insert into articulos(nombre_articulo,precio,pais_de_origen_seccion,observaciones) values(?,?,?,?,?)",["jarron","15.2","japon","ceramica","ganga"]);
+DB::insert("insert into articulos(nombre_articulo,precio,pais_de_origen_seccion,observaciones) values(?,?,?,?,?)",["jarron","15.2","japon","ceramica","ganga"]);
 
 });
-/*
-Route::get("/insertar", function(){
+//insertar datos de forma directa
+Route::get("/insertar2", function(){
  DB::insert("INSERT INTO articulos (NOMBRE_ARTICULO, PRECIO, PAIS_DE_ORIGEN, SECCION, OBSERVACIONES) VALUES(?,?,?,?,?)",["JARRON",15.2,"JAPON","CERAMICA","GANGA"]);
 });
 
+//leer datos de forma directa
 Route::get('/leer', function(){
     $resultados=DB::select("SELECT * FROM  articulos WHERE id=?", [2]);
-	//$resultados=DB::update("select nombre_articulo from articulos where id=1");
     foreach($resultados as $articulos){
     	return $articulos->nombre_articulo;
     }
 });
 
+//actualizar datos de forma directa
 Route::get('/actualizar', function(){
     DB::update("update articulos set seccion='Decoracion' WHERE ID=?", [2]);
 });
 
+//eliminar datos de forma directa
 Route::get('/borrar', function(){
     DB::delete("DELETE FROM articulos WHERE ID=?", [1]);
 });
 
-*/
+
 
 
 use App\Articulo;//se debe colocar para importar el metodo All del modelo Articulo y evitar colcoar App/Articulo
 
 
 //consulta normal select *
-Route::get('/leer', function(){
+Route::get('/leer2', function(){
 
 $articulos=Articulo::all();
 
 	//$articulos=App\Articulo::all();
 
-   // $resultados=DB::select("SELECT * FROM  articulos WHERE id=?", [2]);
-	//$resultados=DB::update("select nombre_articulo from articulos where id=1");
     foreach($articulos as $articulo){
     	echo "Nombre:" . $articulo->nombre_articulo . " Precio: " . $articulo->precio . "<br>";
     }
@@ -73,21 +74,48 @@ $articulos=Articulo::all();
 
 
 //consulta adicionales constraints
-Route::get('/leer2', function(){
+Route::get('/leer3', function(){
 //
-$articulos=Articulo::where("PAIS_DE_ORIGEN","JAPON")->get();
-//$articulos=Articulo::where("PAIS_DE_ORIGEN","JAPON")->min("precio");//buscar al articulo con el precio mas bajo
 
-//$articulos=Articulo::where("PAIS_DE_ORIGEN","JAPON")->orderby("nombre_articulo","desc")->get();//ordenando 
+$articulos=Articulo::where("id",3)->get();
+
 	return $articulos;
-	//$articulos=App\Articulo::all();
 
-
-   /* foreach($articulos as $articulo){
-    	echo "Nombre:" . $articulo->nombre_articulo . " Precio: " . $articulo->precio . "<br>";
-    }
-    */
 });
+
+//consulta de papelera //puede leeer archivos eliminados y los activos
+Route::get('/leer4', function(){
+
+$articulos = App\Articulo::withTrashed()
+                ->where('id', 5)
+                ->get();
+
+	return $articulos;
+
+});
+
+//restaurar archivos de papelera
+Route::get('/restaurar', function(){
+
+$articulos = App\Articulo::withTrashed()
+                ->where('id', 5)
+                ->restore();//permite restaurar los archivos que han sido eliminados mediante la papelera
+
+	return $articulos;
+
+});
+
+//restaurar archivos de papelera
+Route::get('/restaurar', function(){
+
+$articulos = App\Articulo::withTrashed()
+                ->where('id', 5)
+                ->get();
+
+	return $articulos;
+
+});
+
 
 //insertar eloquent
 Route::get('/insertar', function(){
@@ -161,5 +189,23 @@ Route::get('/borrar2', function(){
 Route::get('/insertar3', function(){
 //
 	Articulo::create(["nombre_articulo"=>"Impresora","precio"=>50,"PAIS_DE_ORIGEN"=>"Colombia","observaciones"=>"Nada que decir","seccion"=>"Informatica"]);
+
+});
+
+
+//borrado suave soft delete
+Route::get('/softdelete', function(){
+//
+	Articulo::find(5)->delete();
+
+});
+
+//borrado permaente
+Route::get('/hardDelete', function(){
+//
+
+$articulos = App\Articulo::withTrashed()
+                ->where('id', 5)
+                ->forceDelete();
 
 });
