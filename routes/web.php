@@ -242,6 +242,8 @@ foreach($cliente as $clientes){
 }
 });
 
+//consulta entre relaciones
+/*
 Route::get("/cliente/1/articulo",function(){
 return CLiente::find(1)->articulo;
 
@@ -250,5 +252,12 @@ return CLiente::find(1)->articulo;
 //este es para escribir el id en el navbegador
 Route::get("/cliente/{id}/articulo",function($id){
 return CLiente::find(id)->articulo;
+
+});
+*/
+
+//consulta entre relaciones de articulo hacia cliente
+Route::get("/articulo/{id}/cliente",function($id){
+return Articulo::find($id)->cliente->nombre;
 
 });

@@ -26,7 +26,9 @@ class Articulo extends Model
 
 	    use SoftDeletes;
 
-    protected $dates=["deleted_at"];
+    	protected $dates=["deleted_at"];
 
-    
+    	public function cliente(){
+    		return $this->belongsTo("App\Cliente");
+    	}
 }
