@@ -160,6 +160,6 @@ Route::get('/borrar2', function(){
 //insertar varios
 Route::get('/insertar3', function(){
 //
-	Articulo::create(["nombre_articulo"=>"Impresora","precio"=>50,"PAIS_DE_ORIGEN"=>"Colombia","observaciones"=>"Nada que decir","seccion"=>"Informatica");
+	Articulo::create(["nombre_articulo"=>"Impresora","precio"=>50,"PAIS_DE_ORIGEN"=>"Colombia","observaciones"=>"Nada que decir","seccion"=>"Informatica"]);
 
 });

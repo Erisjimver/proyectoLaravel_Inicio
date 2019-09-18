@@ -13,11 +13,11 @@ class Articulo extends Model
 
 	protected $fillable=[
 
-		"nombre_articulo".
-		"pecio",
-		"pais_de_origen",
+		"nombre_articulo",
+		"precio",
+		"PAIS_DE_ORIGEN",
 		"observaciones",
-		"precio"
+		"seccion"
 
 	];
 }
