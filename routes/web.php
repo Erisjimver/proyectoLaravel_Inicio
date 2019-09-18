@@ -57,7 +57,7 @@ Route::get('/borrar', function(){
 
 
 use App\Articulo;//se debe colocar para importar el metodo All del modelo Articulo y evitar colcoar App/Articulo
-
+use App\CLiente;//se debe colocar para importar el metodo All del modelo Articulo y evitar colcoar App/Articulo
 
 //consulta normal select *
 Route::get('/leer2', function(){
@@ -207,5 +207,48 @@ Route::get('/hardDelete', function(){
 $articulos = App\Articulo::withTrashed()
                 ->where('id', 5)
                 ->forceDelete();
+
+});
+
+
+
+
+
+
+
+
+
+//insertar en tabla clientes
+//insertar eloquent
+Route::get('/insertar5', function(){
+//
+$cliente = new Cliente;
+
+$cliente->nombre="Mirian";
+$cliente->apellidos="Ayala";
+$cliente->save();
+
+
+	return $cliente;
+
+});
+
+
+
+Route::get("/leerC",function(){
+$cliente= App\Cliente::all();
+foreach($cliente as $clientes){
+	echo $cliente->nombre;
+}
+});
+
+Route::get("/cliente/1/articulo",function(){
+return CLiente::find(1)->articulo;
+
+});
+
+//este es para escribir el id en el navbegador
+Route::get("/cliente/{id}/articulo",function($id){
+return CLiente::find(id)->articulo;
 
 });
