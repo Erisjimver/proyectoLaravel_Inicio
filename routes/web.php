@@ -125,3 +125,41 @@ $articulos->save();
 	return $articulos;
 
 });
+
+
+
+//actualizar eloquent
+Route::get('/actualizar3', function(){
+//
+Articulo::where("seccion","ceramica")->where("PAIS_DE_ORIGEN","españa")->update(["seccion"=>"Mensaje"]);
+
+Articulo::where("seccion","ceramica")->where("PAIS_DE_ORIGEN","españa")->update(["precio"=>90]);
+
+
+});
+
+
+
+//actualizar elimina con  id
+Route::get('/borrar', function(){
+//
+	$articulo=Articulo::find(2);
+	$articulo->delete();
+
+});
+
+
+//eliminnar con condicion where
+Route::get('/borrar2', function(){
+//
+	Articulo::where("seccion","ferreteria")->delete();
+
+});
+
+
+//insertar varios
+Route::get('/insertar3', function(){
+//
+	Articulo::create(["nombre_articulo"=>"Impresora","precio"=>50,"PAIS_DE_ORIGEN"=>"Colombia","observaciones"=>"Nada que decir","seccion"=>"Informatica");
+
+});

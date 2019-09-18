@@ -11,5 +11,13 @@ class Articulo extends Model
 
 	//protected $primaryKey="articulo_id";
 
-	
+	protected $fillable=[
+
+		"nombre_articulo".
+		"pecio",
+		"pais_de_origen",
+		"observaciones",
+		"precio"
+
+	];
 }
