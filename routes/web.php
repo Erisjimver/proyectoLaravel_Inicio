@@ -104,7 +104,7 @@ $articulos = App\Articulo::withTrashed()
 	return $articulos;
 
 });
-
+/*
 //restaurar archivos de papelera
 Route::get('/restaurar', function(){
 
@@ -115,7 +115,7 @@ $articulos = App\Articulo::withTrashed()
 	return $articulos;
 
 });
-
+*/
 
 //insertar eloquent
 Route::get('/insertar', function(){
@@ -257,7 +257,31 @@ return CLiente::find(id)->articulo;
 */
 
 //consulta entre relaciones de articulo hacia cliente
+//relacion uno a uno inversa
 Route::get("/articulo/{id}/cliente",function($id){
 return Articulo::find($id)->cliente->nombre;
+
+});
+
+
+///--------------relacion uno a varios------------
+
+Route::get("/articulos",function(){
+$articulos=Cliente::find(3)->articulos->where("pais_de_origen","Ecuador");
+foreach ($articulos as $articulo) {
+    echo $articulo->nombre_articulo . "<br>";
+}
+
+
+});
+
+
+Route::get("/cliente/{id}/perfil/",function($id){
+$cliente=Cliente::find($id);
+
+foreach ($cliente->perfils as $perfil) {
+    return $perfil->nombre;
+}
+
 
 });

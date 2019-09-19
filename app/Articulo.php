@@ -31,4 +31,6 @@ class Articulo extends Model
     	public function cliente(){
     		return $this->belongsTo("App\Cliente");
     	}
+
+    	
 }
