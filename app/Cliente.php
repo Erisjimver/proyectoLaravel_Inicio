@@ -33,4 +33,11 @@ class Cliente extends Model
 		return $this->morphMany("App\Calificaciones", "calificacion");
 
 	}
+
+		protected $fillable=[
+
+		"nombre",
+		"apellidos"
+
+	];
 }
