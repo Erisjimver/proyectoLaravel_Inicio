@@ -32,5 +32,10 @@ class Articulo extends Model
     		return $this->belongsTo("App\Cliente");
     	}
 
+    	public function calificaciones(){
+
+		return $this->morphMany("App\Calificaciones", "calificacion");
+	}
+
     	
 }

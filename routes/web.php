@@ -285,3 +285,26 @@ foreach ($cliente->perfils as $perfil) {
 
 
 });
+
+
+
+Route::get("/calificaciones",function(){
+
+$cliente=Cliente::find(1);
+
+foreach ($cliente->calificaciones as $cali) {
+    return $cali->calificacion;
+}
+
+});
+
+
+Route::get("/calificacionesA",function(){
+
+$articulo=Articulo::find(3);
+
+foreach ($articulo->calificaciones as $cali) {
+    return $cali->calificacion;
+}
+
+});

@@ -27,4 +27,10 @@ class Cliente extends Model
 	public function perfils(){
 		return $this->belongsToMany("App\Perfil");
 	}
+
+	public function calificaciones(){
+
+		return $this->morphMany("App\Calificaciones", "calificacion");
+
+	}
 }
